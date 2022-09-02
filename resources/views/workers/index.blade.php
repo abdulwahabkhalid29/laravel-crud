@@ -18,10 +18,10 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Phone</th>
-                <th>Address</th>
                 <th>email</th>
                 <th>Factory</th>
                 <th>Country</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -30,11 +30,14 @@
                 <td>{{($worker->id)}}</td>
                 <td>{{($worker->name)}}</td>
                 <td>{{($worker->phone)}}</td>
-                <td>{{($worker->address)}}</td>
                 <td>{{($worker->email)}}</td>
                 <td>{{($worker->factory)}}</td>
                 <td>{{($worker->country)}}</td>
-
+                 <td>
+                    <a href="{{route('workers.edit' ,$worker->id)}}"><img src="{{asset('assets/img/b_edit.png')}}" alt="b_edit"> Edit</a>
+                    &nbsp;|&nbsp;
+                    <a href="{{route('workers.delete' ,$worker->id)}}"><img src="{{asset('assets/img/b_drop.png')}}" alt="b_drop"> Delete</a>
+                </td>
             </tr>
             @endforeach
         </tbody>

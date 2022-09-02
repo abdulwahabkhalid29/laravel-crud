@@ -38,3 +38,6 @@ Route::get('countries/{id}/delete', [CountryController::class, 'delete'])->name(
 Route::get('workers' , [WorkerController::class , 'index'])->name('workers.index');
 Route::get('workers/create' , [WorkerController::class , 'create'])->name('workers.create');
 Route::post('workers/store' , [WorkerController::class , 'store'])->name('workers.store');
+Route::get('workers/{id}/edit', [WorkerController::class, 'edit'])->name('workers.edit');
+Route::post('workers/{id}/update', [WorkerController::class, 'update'])->name('workers.update');
+Route::get('workers/{id}/delete', [WorkerController::class, 'delete'])->name('workers.delete');

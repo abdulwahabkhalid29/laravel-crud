@@ -23,7 +23,6 @@ class WorkerController extends Controller
         $request->validate([
             'name' => 'required|max:191|unique:workers,name',
             'phone' => 'required|max:191|:workers,phone',
-            'address' => 'required|max:191|unique:workers,address',
             'email' => 'required|max:191|unique:workers,email',
             'factory' => 'required|max:191|:workers,factory',
             'country' => 'required|max:191|:workers,country',
@@ -31,7 +30,6 @@ class WorkerController extends Controller
         $store = Worker::create([
             'name' =>$request->name,
             'phone' =>$request->phone,
-            'address' =>$request->address,
             'email' =>$request->email,
             'factory' =>$request->factory,
             'country' =>$request->country,
@@ -43,4 +41,40 @@ class WorkerController extends Controller
             return redirect()->route('workers.index')->with('error' , 'something went wrong');
         }
     }
+    public function edit($id){
+        $countries = Country::get();
+        $factories = Factory::get();
+        $worker = Worker::where('id',$id)->first();
+        return view('workers.edit',compact('worker','countries','factories'));
+    }
+
+    public function update(Request $request, $id){
+        $request->validate([ 
+        'name' => 'required|max:191|:workers,name'.$id,
+        'phone' => 'required|max:191|:workers,phone'.$id,
+        'email' => 'required|max:191|:workers,email'.$id,
+        'factory' => 'required|max:191|:workers,factory'.$id,
+        'country' => 'required|max:191|:workers,country'.$id,
+    ]);
+   
+    $update = worker::where('id',$id)->update([
+        'name' => $request->name,
+        'phone' => $request->phone,
+        'email' => $request->email,
+        'factory' => $request->factory,
+        'country' => $request->country,
+    ]);
+    if($update > 0){
+        return redirect()->route('workers.index')->with('success','worker update');
+    }
+    return redirect()->route('workers.index')->with('error','something went wrong');  
+    }
+    public function delete($id){
+        $workers = Worker::where('id',$id)->first();
+        if(!empty($workers)){
+         $workers->delete();
+         return redirect()->route('workers.index')->with('success','Worker delete');
+        }
+        return redirect()->route('workers.index')->with('error','record not found');
+     }
 }
