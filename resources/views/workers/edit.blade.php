@@ -21,35 +21,35 @@
                 <div class="row">
                     <div class="col-md-6 mt-3">
                         <label for="name">Name</label>
-                        <input type="text" class="text-secondary form-control" name="name" value="{{$worker->name}}">
+                        <input type="text" class="text-secondary form-control" name="name" value="{{old('name',$worker->name)}}">
                         <small class="text-danger">@error('name') {{$message}} @enderror</small>
                     </div>
                     <div class="col-md-6 mt-3">
                         <label for="phone">Phone</label>
-                        <input type="text" class="text-secondary form-control" name="phone" value="{{$worker->phone}}">
+                        <input type="text" class="text-secondary form-control" name="phone" value="{{old('phone',$worker->phone)}}">
                         <small class="text-danger">@error('phone') {{$message}} @enderror</small>
                     </div>
                     <div class="col-md-12 mt-3">
                         <label for="email">E-mail</label>
-                        <input type="text" class="text-secondary form-control" name="email" value="{{$worker->email}}">
+                        <input type="text" class="text-secondary form-control" name="email" value="{{old('email',$worker->email)}}">
                         <small class="text-danger">@error('email') {{$message}} @enderror</small>
                     </div>
                     <div class="mt-3 col-md-6">
                             <label for="factory">Factory</label>
-                            <select name="factory" class="form-control">
+                            <select name="factory_id" class="form-control">
                                 <option value="">Please Select</option>
                                 @foreach($factories as $factory)
-                                    <option value="{{ $factory->id }}" @if(old("factory")) selected @endif>{{ $factory->name }}</option>
+                                    <option value="{{ $factory->id }}" @if("factory_id") selected @endif>{{ $factory->name }}</option>
                                 @endforeach
                             </select>
                             <small class="text-danger">@error('factory'){{$message}} @enderror</small>
                         </div>
                         <div class="mt-3 col-md-6">
                             <label for="country">Country</label>
-                            <select name="country" class="form-control">
+                            <select name="country_id" class="form-control">
                                 <option value="">Please Select</option>
                                 @foreach($countries as $country)
-                                    <option value="{{ $country->id }}" @if(old("country")) selected @endif>{{ $country->name }}</option>
+                                    <option value="{{ $country->id }}" @if("country_id") selected @endif>{{ $country->name }}</option>
                                 @endforeach
                             </select>
                             <small class="text-danger">@error('country'){{$message}} @enderror</small>

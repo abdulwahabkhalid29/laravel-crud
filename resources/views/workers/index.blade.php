@@ -27,12 +27,12 @@
         <tbody>
             @foreach($workers as $worker)
             <tr>
-                <td>{{($worker->id)}}</td>
-                <td>{{($worker->name)}}</td>
-                <td>{{($worker->phone)}}</td>
-                <td>{{($worker->email)}}</td>
-                <td>{{($worker->factory)}}</td>
-                <td>{{($worker->country)}}</td>
+                <td>{{ $worker->id}}</td>
+                <td>{{ $worker->name}}</td>
+                <td>{{ $worker->phone}}</td>
+                <td>{{ $worker->email}}</td>
+                <td>{{ $worker->factory_id }}</td>
+                <td>{{ $worker->country->name }}</td>
                  <td>
                     <a href="{{route('workers.edit' ,$worker->id)}}"><img src="{{asset('assets/img/b_edit.png')}}" alt="b_edit"> Edit</a>
                     &nbsp;|&nbsp;

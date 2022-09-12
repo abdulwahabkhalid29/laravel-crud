@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Worker extends Model
 {
-    use HasFactory;
-            
+    use HasFactory;            
     protected $guarded = [];
+    public function factory(){
+        return $this->belongsTo(Factory::class);
+    }
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
 }

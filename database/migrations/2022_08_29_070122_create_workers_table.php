@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->integer('phone');
             $table->string('email');
-            $table->string('factory');
-            $table->string('country');
+            $table->string('factory_id');
+            $table->string('country_id');
             $table->timestamps();
         });
     }

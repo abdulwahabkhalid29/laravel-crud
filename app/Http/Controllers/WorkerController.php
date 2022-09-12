@@ -24,21 +24,21 @@ class WorkerController extends Controller
             'name' => 'required|max:191|unique:workers,name',
             'phone' => 'required|max:191|:workers,phone',
             'email' => 'required|max:191|unique:workers,email',
-            'factory' => 'required|max:191|:workers,factory',
-            'country' => 'required|max:191|:workers,country',
+            'factory_id' => 'required|max:191|:workers,factory_id',
+            'country_id' => 'required|max:191|:workers,country_id',
         ]);
         $store = Worker::create([
             'name' =>$request->name,
             'phone' =>$request->phone,
             'email' =>$request->email,
-            'factory' =>$request->factory,
-            'country' =>$request->country,
+            'factory_id' =>$request->factory_id,
+            'country_id' =>$request->country_id,
         ]);
         if(!empty($store->id)){
-            return redirect()->route('workers.index')->with('Success' , 'Worker Added');
+            return redirect()->route('workers.index')->with('success','worker Added');
         }
         else{
-            return redirect()->route('workers.index')->with('error' , 'something went wrong');
+            return redirect()->route('workers.create')->with('error','Something Went Wrong');
         }
     }
     public function edit($id){
@@ -50,19 +50,19 @@ class WorkerController extends Controller
 
     public function update(Request $request, $id){
         $request->validate([ 
-        'name' => 'required|max:191|:workers,name'.$id,
-        'phone' => 'required|max:191|:workers,phone'.$id,
-        'email' => 'required|max:191|:workers,email'.$id,
-        'factory' => 'required|max:191|:workers,factory'.$id,
-        'country' => 'required|max:191|:workers,country'.$id,
+        'name' => 'required|max:191|unique:workers,name,'.$id,
+        'phone' => 'required|max:191|unique:workers,phone,'.$id,
+        'email' => 'required|max:191|unique:workers,email,'.$id,
+        'factory_id' => 'required|max:191|:workers,factory_id,'.$id,
+        'country_id' => 'required|max:191|:workers,country_id,'.$id,
     ]);
    
     $update = worker::where('id',$id)->update([
         'name' => $request->name,
         'phone' => $request->phone,
         'email' => $request->email,
-        'factory' => $request->factory,
-        'country' => $request->country,
+        'factory_id' => $request->factory_id,
+        'country_id' => $request->country_id,
     ]);
     if($update > 0){
         return redirect()->route('workers.index')->with('success','worker update');
