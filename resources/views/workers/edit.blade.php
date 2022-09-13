@@ -39,7 +39,7 @@
                             <select name="factory_id" class="form-control">
                                 <option value="">Please Select</option>
                                 @foreach($factories as $factory)
-                                    <option value="{{ $factory->id }}" @if("factory_id") selected @endif>{{ $factory->name }}</option>
+                                    <option value="{{ $factory->id }}" @if($factory->id == $worker->factory_id) selected @endif>{{ $factory->name }}</option>
                                 @endforeach
                             </select>
                             <small class="text-danger">@error('factory'){{$message}} @enderror</small>
@@ -49,7 +49,7 @@
                             <select name="country_id" class="form-control">
                                 <option value="">Please Select</option>
                                 @foreach($countries as $country)
-                                    <option value="{{ $country->id }}" @if("country_id") selected @endif>{{ $country->name }}</option>
+                                    <option value="{{ $country->id }}" @if($country->id == $worker->country_id) selected @endif>{{ $country->name }}</option>
                                 @endforeach
                             </select>
                             <small class="text-danger">@error('country'){{$message}} @enderror</small>

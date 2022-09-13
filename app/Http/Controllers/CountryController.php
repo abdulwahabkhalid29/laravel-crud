@@ -22,15 +22,16 @@ class CountryController extends Controller
             'population' => 'required|max:11|:countries,population',
         ]);
         
-        if($request->file('flag')){
-            $flag = $request->file('flag');
-            $flagName = 'flag' . '-' . time() . '.' . $flag->getClientOriginalExtension();
-            $flag->move('upload/flag/', $flagName);
+        if($request->file('country')){
+            $country = $request->file('country');
+            $countryName = 'country' . '-' . time() . '.' . $country->getClientOriginalExtension();
+            $country->move('upload/country/', $countryName);
           }
         $store = Country::create([
             'name' => $request->name,
             'code' => $request->code,
             'population' => $request->population,
+            'country' => $countryName,
         ]);
 
         
@@ -55,10 +56,21 @@ class CountryController extends Controller
         'code' => 'required|max:11|:countries,code'.$id,
         'population' => 'required|max:11|:countries,population'.$id,
     ]);
+    $countryData = Country::where('id',$id)->first();
+    if($request->file('country')){
+        $country = $request->file('country');
+        $countryName = 'country' . '-' . time() . '.' . $country->getClientOriginalExtension();
+        $country->move('upload/country/', $countryName);
+      }
+      else{
+        $countryName = $countryData-> country; 
+      }
     $update = Country::where('id',$id)->update([
         'name' => $request->name,
         'code' => $request->code,
         'population' => $request->population,
+        'country' => $countryName,
+
     ]);
     if($update > 0){
         return redirect()->route('countries.index')->with('success','country update');

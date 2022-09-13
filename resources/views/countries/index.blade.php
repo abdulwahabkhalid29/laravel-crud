@@ -19,6 +19,7 @@
                 <th>Name</th>
                 <th>Code</th>
                 <th>Population</th>
+                <th>Image</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -29,6 +30,7 @@
                 <td>{{($country->name)}}</td>
                 <td>{{($country->code)}}</td>
                 <td>{{($country->population)}}</td>
+                <td style="width:10%"><img class="rounded img-thumbnail" src="{{asset('upload/country/'.$country->country)}}" alt="" width="100%"></td>
                 <td>
                     <a href="{{route('countries.edit' ,$country->id)}}"><img src="{{asset('assets/img/b_edit.png')}}" alt="b_edit"> Edit</a>
                     &nbsp;|&nbsp;

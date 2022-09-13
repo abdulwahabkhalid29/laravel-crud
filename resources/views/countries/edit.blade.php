@@ -16,7 +16,7 @@
             <h2 class="text-success">Edit Country</h2>
         </div>
         <div class="card-body">
-            <form action="{{route('countries.update',$country->id)}}" method="POST">
+            <form action="{{route('countries.update',$country->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mt-3">
@@ -34,6 +34,14 @@
                         <input type="text" class="text-secondary form-control" name="population" value="{{$country->population}}">
                         <small class="text-danger">@error('population') {{$message}} @enderror</small>
                     </div>
+                    <div class="col-md-12 mt-3">
+                            <label for="country">Country</label>
+                            <input type="file" class="form-control" style="border:3px groove blue;" name="country" value="{{old('country')}}">
+                            <small class="text-danger">@error('country'){{$message}} @enderror</small>
+                            @if(!empty($country->country))
+                            <img src="{{asset('upload/country/'.$country->country)}}" class="img-thumbnail" style="height:100px; width:100px" alt="">
+                            @endif
+                        </div>
                     <div class="mt-3 col-md-12 mt-3">
                         <button type="submit" class="btn btn-success btn-block">UPDATE</button>
                     </div>

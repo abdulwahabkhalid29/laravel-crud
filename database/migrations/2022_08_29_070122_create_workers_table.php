@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('factory_id');
             $table->string('country_id');
+            $table->string('country');
             $table->timestamps();
         });
     }
